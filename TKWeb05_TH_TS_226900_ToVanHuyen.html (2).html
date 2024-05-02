@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">	
+    <title>MayTinh</title>
+    <link rel="icon" href="du_lieu_thuc_hanh_B1/images/calculator.png" type="png">
+
+    <style>
+        body{
+            font-family: 'Quicksand', sans-serif;
+
+        }
+        .clt td {
+            border: 1px solid red;
+        }
+        /* .clt{
+            width: 100%;
+            height: 100%;
+        } */
+        table {
+    display: table;
+    border-collapse: separate;
+    box-sizing: border-box;
+    text-indent: initial;
+    border-spacing: 2px;
+    border-color: gray;
+    width: 100%;
+    height: 930px;
+}
+input[type="text" i] {
+    padding-block: 1px;
+    padding-inline: 2px;
+    width: 1843px;
+    height: 84px;
+    font-size: 100px;
+    font-weight: bold;
+    font-family: 'Quicksand', sans-serif;
+}
+button {
+    width: 458px;
+    height: 212px;
+    font-size: 100px;
+    font-weight: bold;
+    font-family: 'Quicksand', sans-serif;
+}
+
+
+    </style>
+</head>
+<body>
+    <table class="clt">
+        <tr><td colspan="4"> <input type="text" id="txtHienThi" /></td></tr>
+        <tr>
+            <td><button onclick="appendNumber('1')">1</button></td>
+            <td><button onclick="appendNumber('2')">2</button></td>
+            <td><button onclick="appendNumber('3')">3</button></td>
+            <td><button onclick="appendOperator('+')">+</button></td>
+        </tr>
+        <tr>
+            <td><button onclick="appendNumber('4')">4</button></td>
+            <td><button onclick="appendNumber('5')">5</button></td>
+            <td><button onclick="appendNumber('6')">6</button></td>
+            <td><button onclick="appendOperator('-')">-</button></td>
+        </tr>
+        <tr>
+            <td><button onclick="appendNumber('7')">7</button></td>
+            <td><button onclick="appendNumber('8')">8</button></td>
+            <td><button onclick="appendNumber('9')">9</button></td>
+            <td><button onclick="appendOperator('*')">*</button></td>
+        </tr>
+        <tr>
+            <td><button onclick="appendNumber('0')">0</button></td>
+            <td><button onclick="calculate()">=</button></td>
+            <td><button onclick="clearInput()">C</button></td>
+            <td><button onclick="appendOperator('/')">/</button></td>
+        </tr>
+    </table>
+    <script>
+        let currentInput = '';
+        let currentOperator = null;
+        let shouldResetInput = false;
+
+        function appendNumber(number) {
+            const display = document.getElementById('txtHienThi');
+            if (display.value === '0' || shouldResetInput) resetInput();
+            display.value += number;
+        }
+
+        function appendOperator(operator) {
+            const display = document.getElementById('txtHienThi');
+            if (currentOperator !== null) calculate();
+            currentInput = display.value;
+            currentOperator = operator;
+            shouldResetInput = true;
+        }
+
+        function calculate() {
+            const display = document.getElementById('txtHienThi');
+            let result;
+            const previousInput = parseFloat(currentInput);
+            const currentNumber = parseFloat(display.value);
+            switch (currentOperator) {
+                case '+':
+                    result = previousInput + currentNumber;
+                    break;
+                case '-':
+                    result = previousInput - currentNumber;
+                    break;
+                case '*':
+                    result = previousInput * currentNumber;
+                    break;
+                case '/':
+                    result = previousInput / currentNumber;
+                    break;
+                default:
+                    return;
+            }
+            display.value = result;
+            currentOperator = null;
+        }
+
+        function resetInput() {
+            const display = document.getElementById('txtHienThi');
+            display.value = '';
+            shouldResetInput = false;
+        }
+
+        function clearInput() {
+            const display = document.getElementById('txtHienThi');
+            display.value = '0';
+            currentInput = '';
+            currentOperator = null;
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+     <!-- custom css  -->
+     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">	
+<head>
+    <style>
+        body {
+            font-family: 'Quicksand', sans-serif;
+        }
+  
+        input[type=text], input[type=password], input[ type="email"] {
+            width: 90%;
+            padding: 15px;
+            margin: 5px 0 22px 0;
+            display: inline-block;
+            border: none;
+            background: #f1f1f1;
+            border: 1px solid #ccc;
+            /* box size: border-box; */
+        }
+        .btn {
+            background-color: #4CAF50;
+            color: white;
+            padding: 16px 20px;
+            margin: 8px 0;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            opacity: 0.9;
+            font-size: 14px;
+        }
+        .btn:hover {
+            opacity: 1;
+        }
+        .dangky{
+    background-color: #ddd;
+    border: 1px solid #ccc;
+    width: 51%;
+}
+.label{
+    display: inline-block;
+}
+.huy {
+    color: white;
+    background-color: #f44336;
+    padding: 17px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    opacity: 0.9;
+    font-size: 14px;
+    width:50%;
+}
+#dangkky{
+   color: white;
+   background-color: #4CAF50;
+   padding: 17px 20px;
+   margin: 2px -4px;
+   border: none;
+   cursor: pointer;
+   opacity: 0.9;
+   font-size: 14px;
+   width:50%;
+
+}
+
+    </style>
+</head>
+<body>
+    <form class="dangky">
+        <h2>ĐĂNG KÝ</h2>
+        <p>Vui lòng nhập thông tin để tạo mới tài khoản:</p>
+        
+        <strong> <label  class="email"     for="email">Email:</label></strong><br>
+
+        <!-- <input type="email" id="email" name="email" placeholder="Vui lòng nhập email!"><br> -->
+       <input type="email" id="email" name="email" placeholder="Vui lòng nhập email!"><br>
+        <strong><label for="password">Mật khẩu:</label></strong><br>
+
+        <input type="password" id="password" name="password" placeholder="Vui lòng nhập mật khẩu!"><br>
+        <strong><label for="repassword">Nhập lại mật khẩu:</label><br>
+        </strong>
+        <input type="password" id="repassword" name="repassword" placeholder="Vui lòng nhập mật khẩu!"><br>
+            <div class="label">
+        <label>Chọn cấp độ thành viên:</label><br>
+        <input type="radio" id="bac" name="memberlevel" value="bac">
+        <label for="bac">Bạc</label><br>
+        <input type="radio" id="vang" name="memberlevel" value="vang">
+        <label for="vang">Vàng</label><br>
+        <input type="radio" id="bachkim" name="memberlevel" value="bachkim">
+        <label for="bachkim">Bạch Kim</label><br>
+        <input type="checkbox" id="terms" name="terms">
+        <label for="terms">Thông qua việc tạo tài khoản, <a href="">bạn đồng ý với Điều Khoản & Quyền riêng tư của chúng tôi?</a></label><br>
+        <input type="reset"    class="huy"   value="Hủy">
+        <input type="submit"  id="dangkky" value="Đăng Ký">
+        
+    </div>
+    </form>
+    <script>
+        document.querySelector('.dangky').addEventListener('submit', function(event) {
+            event.preventDefault();
+        
+            var email = document.getElementById('email').value;
+            var password = document.getElementById('password').value;
+            var repassword = document.getElementById('repassword').value;
+            var memberlevel = document.querySelector('input[name="memberlevel"]:checked');
+            
+            if (!validateEmail(email)) {
+                alert('Vui lòng nhập email hợp lệ!');
+                return false;
+            }
+        
+            if (password.length < 8) {
+                alert('Mật khẩu phải có độ dài tối thiểu là 8 ký tự!');
+                return false;
+            }
+        
+            if (password !== repassword) {
+                alert('Mật khẩu và nhập lại mật khẩu phải giống nhau!');
+                return false;
+            }
+        
+            if (!memberlevel) {
+                alert('Bạn phải chọn cấp độ thành viên!');
+                return false;
+            }
+        
+            alert('Đăng ký thành công!');
+            return true;
+        });
+        
+        function validateEmail(email) {
+            var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+            return re.test(String(email).toLowerCase());
+        }
+        </script>
+</body>
+</html>
+
+
+

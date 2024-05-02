@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">	
+    <link rel="icon" href="du_lieu_thuc_hanh_B1/images/list-check (1).png" type="png">
+    <title>To-Do List</title>
+    <style>
+        body{
+            font-family: 'Quicksand', sans-serif;
+            
+        }
+        .frm{
+            text-align: center;
+            font-weight: 700;
+            font-size: 40px;
+        }
+        input[type="text" i] {
+    padding-block: 1px;
+    padding-inline: 2px;
+    width: 148px;
+    height: 24px;
+}
+        
+        
+
+    </style>
+</head>
+<body>
+    <form  class="frm"  name="frm">
+        <label for="txtCongViec">Công việc:</label>
+        <input type="text" id="txtCongViec">
+        <br/>
+        <input name="mucdo" type="radio" value="0"/> Bình Thường
+        <input name="mucdo" type="radio" value="1"/> Quan Trọng
+        <input name="mucdo" type="radio" value="2"/> Rất Quan Trọng
+        <input name="mucdo" type="button" value="Thêm" onclick="themCongViec()"  >
+    </form>
+    <ul id="danhSach"></ul>
+    <script>
+        function themCongViec() {
+            var congViec = document.getElementById('txtCongViec').value;
+            var mucDo = document.frm.mucdo.value;
+            var danhSach = document.getElementById('danhSach');
+            var li = document.createElement('li');
+            li.textContent = congViec + ' (' + getMucDo(mucDo) + ')';
+            li.style.backgroundColor = getColor(mucDo);                                             // thay đổi màu backgroundColor
+            li.style.color = 'black';
+            danhSach.appendChild(li);
+            document.getElementById('txtCongViec').value = '';
+        }
+
+        function getMucDo(value) {
+            switch(value) {
+                case '0':
+                    return 'Bình thường';
+                case '1':
+                    return 'Quan trọng';
+                case '2':
+                    return 'Rất quan trọng';
+                default:
+                    return '';
+            }
+        }
+
+        function getColor(value) {
+            switch(value) {
+                case '0':
+                    return 'white';
+                case '1':
+                    return 'yellow';
+                case '2':
+                    return 'red';
+                default:
+                    return 'white';
+            }
+        }
+    </script>
+</body>
+</html>
